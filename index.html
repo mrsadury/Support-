@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="pageTitle">Home - Ayat's Halal Support</title>
+    <meta name="description" content="Support Ayat's ad-free Islamic content creation. Donate via Bkash or Nagad.">
+    <!-- Lottie Player -->
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    <!-- Twemoji -->
+    <script src="https://twemoji.maxcdn.com/v/latest/twemoji.min.js" crossorigin="anonymous"></script>
+
+    <style>
+        /* css/style.css content here */
+        :root {
+            --deep-blue: #485696;
+            --light-gray: #E7E7E7;
+            --light-orange: #F9C784;
+            --bright-orange: #FC7A1E;
+            --deep-orange: #F24C00;
+            --text-dark: #333;
+            --text-light: #fff;
+            --bg-main: var(--light-gray);
+            --card-bg: #fff;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-dark);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            padding-top: 80px; /* Space for fixed header */
+        }
+
+        .container {
+            width: 90%;
+            max-width: 960px;
+            margin: 2rem auto;
+            padding: 1.5rem;
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+
+        /* Header & Navigation */
+        header {
+            background-color: var(--deep-blue);
+            color: var(--text-light);
+            padding: 1rem 5%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--light-orange);
+            text-decoration: none;
+            cursor: pointer; /* Since it acts as a link */
+        }
+        .logo .emoji {
+            width: 1.2em;
+            height: 1.2em;
+            vertical-align: -0.2em;
+        }
+
+        .header-controls {
+            display: flex;
+            align-items: center;
+        }
+
+        .lang-switch {
+            display: flex;
+            align-items: center;
+            margin-right: 20px;
+            background-color: rgba(255,255,255,0.2);
+            border-radius: 20px;
+            padding: 5px;
+            cursor: pointer;
+        }
+        .lang-switch span {
+            padding: 5px 8px;
+            font-size: 0.8em;
+            border-radius: 15px;
+            transition: background-color 0.3s ease;
+        }
+        .lang-switch .active-lang {
+            background-color: var(--bright-orange);
+            color: white;
+            font-weight: bold;
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.8rem;
+            background: none;
+            border: none;
+            color: var(--text-light);
+            cursor: pointer;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 20px;
+        }
+
+        nav ul li a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 5px 10px;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+            cursor: pointer;
+        }
+
+        nav ul li a:hover, nav ul li a.active-nav {
+            background-color: var(--bright-orange);
+            color: var(--text-light);
+        }
+
+        /* Main Content Sections */
+        .page-section { /* Used to show/hide "pages" */
+            display: none; /* Hidden by default */
+        }
+        .page-section.active {
+            display: block; /* Shown when active */
+        }
+
+        .page-content {
+            flex-grow: 1;
+        }
+
+        .page-title {
+            color: var(--deep-blue);
+            text-align: center;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+            font-weight: 700;
+        }
+        .page-title .emoji {
+            width: 1.2em;
+            height: 1.2em;
+            vertical-align: -0.2em;
+        }
+
+        /* Welcome Section (Homepage) */
+        .welcome-section {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        #lottie-welcome {
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 1rem;
+        }
+
+        #welcome-text {
+            font-size: 1.2rem;
+            color: var(--deep-blue);
+            margin-bottom: 1rem;
+        }
+        #welcome-text .emoji {
+            width: 1.1em;
+            height: 1.1em;
+            vertical-align: -0.1em;
+        }
+
+        #bangla-intro {
+            font-size: 1.1rem;
+            background-color: var(--light-orange);
+            color: var(--deep-blue);
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            display: inline-block;
+            border: 2px solid var(--bright-orange);
+            margin-top: 1rem;
+        }
+
+        /* Donate Section (Homepage) */
+        .donate-section {
+            padding: 2rem;
+            background-color: #fff;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+
+        .donate-section h2 {
+            text-align: center;
+            color: var(--deep-blue);
+            margin-bottom: 1.5rem;
+        }
+        .donate-section h2 .emoji {
+            width: 1.2em;
+            height: 1.2em;
+            vertical-align: -0.2em;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--deep-blue);
+        }
+
+        .form-group input[type="text"],
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+        .form-group input[type="text"]:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--bright-orange);
+            box-shadow: 0 0 0 2px rgba(252, 122, 30, 0.2);
+        }
+
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .btn-submit {
+            display: block;
+            width: 100%;
+            padding: 0.8rem 1.2rem;
+            background-color: var(--bright-orange);
+            color: var(--text-light);
+            border: none;
+            border-radius: 4px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.1s ease;
+        }
+        .btn-submit .emoji {
+            width: 1.2em;
+            height: 1.2em;
+            vertical-align: -0.2em;
+            margin-left: 0.3em;
+        }
+
+        .btn-submit:hover {
+            background-color: var(--deep-orange);
+        }
+        .btn-submit:active {
+            transform: translateY(1px);
+        }
+
+        .payment-methods {
+            margin-top: 2.5rem;
+            text-align: center;
+        }
+
+        .payment-methods h3 {
+            color: var(--deep-blue);
+            margin-bottom: 1.5rem;
+        }
+
+        .payment-option {
+            background-color: var(--light-gray);
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid #ddd;
+        }
+        .payment-option .emoji {
+            width: 1.5em;
+            height: 1.5em;
+            vertical-align: -0.2em;
+            margin-right: 0.5em;
+        }
+
+        .payment-info {
+            text-align: left;
+        }
+        .payment-info strong {
+            font-size: 1.1rem;
+            color: var(--deep-blue);
+        }
+        .payment-info span {
+            font-size: 1rem;
+            color: var(--text-dark);
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .copy-btn {
+            background-color: var(--deep-blue);
+            color: var(--text-light);
+            border: none;
+            padding: 0.6rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: background-color 0.3s ease;
+            min-width: 80px;
+        }
+
+        .copy-btn:hover {
+            background-color: #3a457a;
+        }
+
+        .copy-btn.copied {
+            background-color: #28a745;
+        }
+
+        #form-status {
+            text-align: center;
+            margin-top: 1rem;
+            font-weight: bold;
+        }
+        .success-message { color: green; }
+        .error-message { color: red; }
+
+        /* Generic Page Content Styling */
+        .page-section .container p,
+        .page-section .container ul,
+        .page-section .container dl {
+            margin-bottom: 1rem;
+            color: #555;
+        }
+        .page-section .container ul {
+            list-style-position: inside;
+            padding-left: 1em;
+        }
+        .page-section .container ul li .emoji {
+            width: 1em;
+            height: 1em;
+            vertical-align: -0.1em;
+        }
+        .page-section .container h3 {
+            color: var(--deep-blue);
+            margin-top: 1.5rem;
+            margin-bottom: 0.8rem;
+        }
+        .page-section .container dl dt {
+            font-weight: bold;
+            color: var(--bright-orange);
+            margin-top: 1rem;
+        }
+        .page-section .container dl dd {
+            margin-left: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .page-section .container a {
+            color: var(--bright-orange);
+            text-decoration: none;
+        }
+        .page-section .container a:hover {
+            text-decoration: underline;
+            color: var(--deep-orange);
+        }
+        .page-section .container em {
+            display: block;
+            margin-top: 1rem;
+            padding: 0.8rem;
+            background-color: var(--light-orange);
+            border-left: 4px solid var(--bright-orange);
+            color: var(--deep-blue);
+            font-style: italic;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 1.5rem;
+            background-color: var(--deep-blue);
+            color: var(--light-gray);
+            margin-top: auto;
+        }
+        footer .emoji {
+            width: 1em;
+            height: 1em;
+            vertical-align: -0.1em;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            body {
+                padding-top: 70px;
+            }
+            .menu-toggle {
+                display: block;
+            }
+
+            nav {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--deep-blue);
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s ease-out;
+            }
+
+            nav.active {
+                max-height: 300px;
+                box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            }
+
+            nav ul {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            nav ul li {
+                margin: 0;
+                text-align: center;
+            }
+
+            nav ul li a {
+                display: block;
+                padding: 1rem;
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+            }
+            nav ul li:last-child a {
+                border-bottom: none;
+            }
+
+            .container {
+                width: 95%;
+                padding: 1rem;
+            }
+            .donate-section {
+                padding: 1.5rem;
+            }
+            .payment-option {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .payment-info {
+                margin-bottom: 0.5rem;
+            }
+            .copy-btn {
+                width: 100%;
+                margin-top: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <span class="logo" data-page="home" data-lang-key="logoText">Ayat's Halal Content <span class="emoji">🌟</span></span>
+        <div class="header-controls">
+            <div class="lang-switch" id="lang-toggle">
+                <span id="lang-en" class="active-lang">EN</span>
+                <span id="lang-bn">BN</span>
+            </div>
+            <button class="menu-toggle" id="menu-toggle" aria-label="Toggle navigation menu">☰</button>
+        </div>
+        <nav id="main-nav">
+            <ul>
+                <li><a data-page="home" class="active-nav" data-lang-key="navHome">Home</a></li>
+                <li><a data-page="about" data-lang-key="navAbout">About Me</a></li>
+                <li><a data-page="why-donate" data-lang-key="navWhyDonate">Why I Need Donation</a></li>
+                <li><a data-page="faq" data-lang-key="navFAQ">FAQ / Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="page-content">
+        <!-- Home Section -->
+        <section id="home" class="page-section active">
+            <div class="container">
+                <div class="welcome-section">
+                    <div id="lottie-welcome" aria-label="Animated welcome gesture"></div>
+                    <h1 id="welcome-text" data-lang-key="welcomeMessage">
+                        Assalamu Alaikum, I am Ayat! If you like my content, support me to keep going without relying on ads! 🌙💖
+                    </h1>
+                    <p id="bangla-intro" data-lang-key="banglaWelcome" style="display: none;">
+                        YouTube থেকে ইনকাম হারাম হতে পারে, তাই আমি অ্যাড-ফ্রি, কোয়ালিটি ইসলামিক ভিডিও বানাই—আপনারা যদি আমাকে সাহায্য করতে চান, এই ওয়েবসাইট থেকে ডোনেট করতে পারেন ইনশাআল্লাহ!
+                    </p>
+                </div>
+
+                <div class="donate-section">
+                    <h2 data-lang-key="donateTitle">Support My Work 🙏</h2>
+                    <form id="donate-form">
+                        <div class="form-group">
+                            <label for="donor-name" data-lang-key="donorNameLabel">Your Name (Optional)</label>
+                            <input type="text" id="donor-name" name="donor-name" data-lang-key-placeholder="donorNamePlaceholder" placeholder="e.g., Abdullah">
+                        </div>
+                        <div class="form-group">
+                            <label for="donor-description" data-lang-key="donorDescriptionLabel">Message (Optional)</label>
+                            <textarea id="donor-description" name="donor-description" data-lang-key-placeholder="donorDescriptionPlaceholder" placeholder="May Allah bless you!"></textarea>
+                        </div>
+                        <button type="submit" class="btn-submit" data-lang-key="submitDonation">Send Support Note <span class="emoji">💌</span></button>
+                    </form>
+                    <div id="form-status"></div>
+
+                    <div class="payment-methods">
+                        <h3 data-lang-key="paymentMethodsTitle">Donate Directly:</h3>
+                        <div class="payment-option">
+                            <div class="payment-info">
+                                <span class="emoji">💰</span> <strong data-lang-key="bkashNumberText">Bkash Personal:</strong> <span id="bkash-number">01318228418</span>
+                            </div>
+                            <button class="copy-btn" data-target="bkash-number" data-lang-key="copyButtonText">Copy</button>
+                        </div>
+                        <div class="payment-option">
+                            <div class="payment-info">
+                                <span class="emoji">💸</span> <strong data-lang-key="nagadNumberText">Nagad Personal:</strong> <span id="nagad-number">01837941711</span>
+                            </div>
+                            <button class="copy-btn" data-target="nagad-number" data-lang-key="copyButtonText">Copy</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="page-section">
+            <div class="container">
+                <h1 class="page-title" data-lang-key="aboutTitle">About Me <span class="emoji">🎙️</span></h1>
+                <div data-lang-key="aboutContent">
+                    <!-- Content will be populated by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Why Donate Section -->
+        <section id="why-donate" class="page-section">
+            <div class="container">
+                <h1 class="page-title" data-lang-key="whyDonateTitle">Why Your Donation Matters <span class="emoji">💖</span></h1>
+                <div data-lang-key="whyDonateContent">
+                    <!-- Content will be populated by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section id="faq" class="page-section">
+            <div class="container">
+                <h1 class="page-title" data-lang-key="faqTitle">FAQ / Contact <span class="emoji">❓</span></h1>
+                <div data-lang-key="faqContent">
+                    <!-- Content will be populated by JS -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p data-lang-key="footerText">© 2024 Ayat's Halal Content. Made with <span class="emoji">💖</span></p>
+    </footer>
+
+    <script>
+        // --- Language Strings (from lang.js) ---
+        const translations = {
+            en: {
+                // General
+                navHome: "Home",
+                navAbout: "About Me",
+                navWhyDonate: "Why I Need Donation",
+                navFAQ: "FAQ / Contact",
+                logoText: "Ayat's Halal Content <span class=\"emoji\">🌟</span>",
+                footerText: `© ${new Date().getFullYear()} Ayat's Halal Content. Made with <span class="emoji">💖</span>`,
+                // Homepage
+                welcomeLottieAlt: "Animated waving hand or welcome gesture",
+                welcomeMessage: "Assalamu Alaikum, I am Ayat! If you like my content, support me to keep going without relying on ads! <span class=\"emoji\">🌙💖</span>",
+                donateTitle: "Support My Work <span class=\"emoji\">🙏</span>",
+                donorNameLabel: "Your Name (Optional)",
+                donorNamePlaceholder: "e.g., Abdullah",
+                donorDescriptionLabel: "Message (Optional)",
+                donorDescriptionPlaceholder: "May Allah bless you!",
+                submitDonation: "Send Support Note <span class=\"emoji\">💌</span>",
+                paymentMethodsTitle: "Donate Directly:",
+                bkashNumberText: "Bkash Personal:",
+                nagadNumberText: "Nagad Personal:",
+                copyButtonText: "Copy",
+                copiedButtonText: "Copied!",
+                donationThanks: "JazakAllah Khairan for your support note! If you wish to donate, please use the numbers below.",
+                donationError: "Oops! Something went wrong. Please try again.",
+                // About Page
+                aboutTitle: "About Me <span class=\"emoji\">🎙️</span>",
+                aboutContent: `
+                    <p>Assalamu Alaikum! I'm Ayat, a content creator passionate about sharing beneficial Islamic knowledge and reflections through video.</p>
+                    <p>My journey began with a simple desire to spread good in a way that is engaging and accessible. I believe in creating high-quality content that adheres to Islamic principles, which includes avoiding music with instruments and ensuring all earnings are Halal.</p>
+                    <p>This platform is a way for you, my valued viewers, to support this mission directly. Your contributions allow me to dedicate more time and resources to producing even better videos without compromising on these values.</p>
+                    <p>Thank you for being a part of this community! <span class="emoji">✨</span></p>
+                `,
+                // Why Donate Page
+                whyDonateTitle: "Why Your Donation Matters <span class=\"emoji\">💖</span>",
+                whyDonateContent: `
+                    <p>YouTube income can often be associated with advertisements that may not align with Islamic values, or the income source itself can be ambiguous (haram). To avoid this, I have chosen to make my YouTube channel completely ad-free.</p>
+                    <h3>This means:</h3>
+                    <ul>
+                        <li>No disruptive ads during videos.</li>
+                        <li>No income from YouTube's ad revenue program.</li>
+                    </ul>
+                    <p>Creating quality Islamic content takes time, effort, and resources. This includes:</p>
+                    <ul>
+                        <li>Research and scriptwriting <span class="emoji">📜</span></li>
+                        <li>Video recording and editing <span class="emoji">🎬</span></li>
+                        <li>Equipment (camera, microphone, lighting) <span class="emoji">⚙️</span></li>
+                        <li>Software licenses <span class="emoji">💻</span></li>
+                        <li>Time, which is the most valuable resource! <span class="emoji">🕒</span></li>
+                    </ul>
+                    <p>Your generous donations are my primary means of support. They enable me to:</p>
+                    <ul>
+                        <li>Continue producing high-quality, ad-free Islamic videos.</li>
+                        <li>Improve production quality.</li>
+                        <li>Dedicate more time to content creation.</li>
+                        <li>Ensure that the means of earning are purely Halal.</li>
+                    </ul>
+                    <p>Every contribution, no matter how small, makes a significant difference and is deeply appreciated. May Allah reward you abundantly! JazakAllahu Khairan. <span class="emoji">🤲</span></p>
+                    <em>"The believer's shade on the Day of Resurrection will be his charity."</em> (Al-Tirmidhi)
+                `,
+                // FAQ Page
+                faqTitle: "FAQ / Contact <span class=\"emoji\">❓</span>",
+                faqContent: `
+                    <h3>Frequently Asked Questions</h3>
+                    <dl>
+                        <dt>Q: Is your YouTube income Halal?</dt>
+                        <dd>A: To avoid any doubt, I do not monetize my YouTube channel with ads. My income for this work comes solely from your direct support through donations, ensuring it's Halal, Insha'Allah.</dd>
+
+                        <dt>Q: How can I be sure my donation is used properly?</dt>
+                        <dd>A: I consider your donations an Amanah (trust). They are used to cover the costs of video production, equipment, software, and living expenses, allowing me to dedicate myself to this Da'wah work.</dd>
+
+                        <dt>Q: Can I suggest video topics?</dt>
+                        <dd>A: Absolutely! I love hearing from my viewers. You can send your suggestions through the contact methods below or in YouTube comments.</dd>
+
+                        <dt>Q: What if I can't donate financially?</dt>
+                        <dd>A: Your Du'as (prayers) are one of the best forms of support! Sharing my videos with others who might benefit is also a great way to help. May Allah reward you!</dd>
+                    </dl>
+                    <h3>Contact Me</h3>
+                    <p>For inquiries, suggestions, or just to say Salam:</p>
+                    <ul>
+                        <li><strong>Email:</strong> <a href="mailto:ayat.halal.content@example.com">ayat.halal.content@example.com</a></li>
+                        <li><strong>YouTube Channel:</strong> <a href="YOUR_YOUTUBE_CHANNEL_LINK" target="_blank" rel="noopener noreferrer">[Your Channel Name]</a></li>
+                    </ul>
+                `,
+                banglaWelcome: "YouTube থেকে ইনকাম হারাম হতে পারে, তাই আমি অ্যাড-ফ্রি, কোয়ালিটি ইসলামিক ভিডিও বানাই—আপনারা যদি আমাকে সাহায্য করতে চান, এই ওয়েবসাইট থেকে ডোনেট করতে পারেন ইনশাআল্লাহ!"
+            },
+            bn: {
+                navHome: "হোম",
+                navAbout: "আমার সম্পর্কে",
+                navWhyDonate: "কেন অনুদান প্রয়োজন",
+                navFAQ: "প্রশ্নাবলী / যোগাযোগ",
+                logoText: "আয়াতের হালাল কন্টেন্ট <span class=\"emoji\">🌟</span>",
+                footerText: `© ${new Date().getFullYear()} আয়াতের হালাল কন্টেন্ট. <span class="emoji">💖</span> দিয়ে তৈরি।`,
+                welcomeLottieAlt: "অ্যানিমেটেড হাত নাড়ানো বা স্বাগত ভঙ্গি",
+                welcomeMessage: "আসসালামু আলাইকুম, আমি আয়াত! যদি আমার কন্টেন্ট আপনার ভালো লাগে, বিজ্ঞাপন ছাড়াই কাজ চালিয়ে যেতে আমাকে সমর্থন করুন! <span class=\"emoji\">🌙💖</span>",
+                donateTitle: "আমার কাজকে সমর্থন করুন <span class=\"emoji\">🙏</span>",
+                donorNameLabel: "আপনার নাম (ঐচ্ছিক)",
+                donorNamePlaceholder: "যেমন, আব্দুল্লাহ",
+                donorDescriptionLabel: "বার্তা (ঐচ্ছিক)",
+                donorDescriptionPlaceholder: "আল্লাহ আপনার মঙ্গল করুন!",
+                submitDonation: "সহায়তার নোট পাঠান <span class=\"emoji\">💌</span>",
+                paymentMethodsTitle: "সরাসরি ডোনেট করুন:",
+                bkashNumberText: "বিকাশ পার্সোনাল:",
+                nagadNumberText: "নগদ পার্সোনাল:",
+                copyButtonText: "কপি",
+                copiedButtonText: "কপি হয়েছে!",
+                donationThanks: "আপনার সহায়তার নোটের জন্য জাযাকাল্লাহ খাইরান! আপনি যদি অনুদান দিতে চান, অনুগ্রহ করে নীচের নম্বরগুলি ব্যবহার করুন।",
+                donationError: "উফফ! কিছু একটা সমস্যা হয়েছে। অনুগ্রহ করে আবার চেষ্টা করুন।",
+                aboutTitle: "আমার সম্পর্কে <span class=\"emoji\">🎙️</span>",
+                aboutContent: `
+                    <p>আসসালামু আলাইকুম! আমি আয়াত, একজন কন্টেন্ট ক্রিয়েটর, যিনি ভিডিওর মাধ্যমে উপকারী ইসলামিক জ্ঞান এবং চিন্তাভাবনা শেয়ার করতে আগ্রহী।</p>
+                    <p>আমার যাত্রা শুরু হয়েছিল সহজ একটি ইচ্ছা থেকে - আকর্ষণীয় এবং সহজলভ্য উপায়ে ভালো কিছু ছড়িয়ে দেওয়া। আমি ইসলামিক নীতি মেনে উচ্চমানের কন্টেন্ট তৈরিতে বিশ্বাসী, যার মধ্যে বাদ্যযন্ত্রসহ সঙ্গীত পরিহার করা এবং সমস্ত উপার্জন হালাল হওয়া নিশ্চিত করা অন্তর্ভুক্ত।</p>
+                    <p>এই প্ল্যাটফর্মটি আমার মূল্যবান দর্শকদের জন্য একটি মাধ্যম, যার দ্বারা আপনারা সরাসরি এই মিশনকে সমর্থন করতে পারেন। আপনাদের অনুদান আমাকে এই মূল্যবোধগুলোর সাথে আপোস না করে আরও ভালো ভিডিও তৈরিতে আরও বেশি সময় এবং সংস্থান উৎসর্গ করতে সাহায্য করে।</p>
+                    <p>এই সম্প্রদায়ের অংশ হওয়ার জন্য আপনাকে ধন্যবাদ! <span class="emoji">✨</span></p>
+                `,
+                whyDonateTitle: "আপনার অনুদান কেন গুরুত্বপূর্ণ <span class=\"emoji\">💖</span>",
+                whyDonateContent: `
+                    <p>ইউটিউব থেকে আয় প্রায়শই এমন বিজ্ঞাপনের সাথে যুক্ত হতে পারে যা ইসলামিক মূল্যবোধের সাথে সঙ্গতিপূর্ণ নাও হতে পারে, অথবা আয়ের উৎসটি নিজেই অস্পষ্ট (হারাম) হতে পারে। এটি এড়াতে, আমি আমার ইউটিউব চ্যানেলটিকে সম্পূর্ণ বিজ্ঞাপন-মুক্ত করার সিদ্ধান্ত নিয়েছি।</p>
+                    <h3>এর মানে হলো:</h3>
+                    <ul>
+                        <li>ভিডিও চলাকালীন কোনও বিরক্তিকর বিজ্ঞাপন নেই।</li>
+                        <li>ইউটিউবের বিজ্ঞাপন রাজস্ব প্রোগ্রাম থেকে কোনও আয় নেই।</li>
+                    </ul>
+                    <p>মানসম্পন্ন ইসলামিক কন্টেন্ট তৈরি করতে সময়, প্রচেষ্টা এবং সম্পদের প্রয়োজন। এর মধ্যে রয়েছে:</p>
+                    <ul>
+                        <li>গবেষণা এবং স্ক্রিপ্ট লেখা <span class="emoji">📜</span></li>
+                        <li>ভিডিও রেকর্ডিং এবং সম্পাদনা <span class="emoji">🎬</span></li>
+                        <li>সরঞ্জাম (ক্যামেরা, মাইক্রোফোন, আলো) <span class="emoji">⚙️</span></li>
+                        <li>সফ্টওয়্যার লাইসেন্স <span class="emoji">💻</span></li>
+                        <li>সময়, যা সবচেয়ে মূল্যবান সম্পদ! <span class="emoji">🕒</span></li>
+                    </ul>
+                    <p>আপনাদের উদার অনুদানই আমার সমর্থনের প্রধান মাধ্যম। এগুলো আমাকে সক্ষম করে:</p>
+                    <ul>
+                        <li>উচ্চ-মানের, বিজ্ঞাপন-মুক্ত ইসলামিক ভিডিও তৈরি চালিয়ে যেতে।</li>
+                        <li>উৎপাদনের মান উন্নত করতে।</li>
+                        <li>কন্টেন্ট তৈরিতে আরও বেশি সময় দিতে।</li>
+                        <li>উপার্জনের মাধ্যম সম্পূর্ণরূপে হালাল হওয়া নিশ্চিত করতে।</li>
+                    </ul>
+                    <p>প্রতিটি অনুদান, তা যতই ছোট হোক না কেন, একটি গুরুত্বপূর্ণ পার্থক্য তৈরি করে এবং গভীরভাবে প্রশংসিত হয়। আল্লাহ আপনাকে প্রচুর প্রতিদান দিন! জাযাকাল্লাহু খাইরান। <span class="emoji">🤲</span></p>
+                    <em>"কিয়ামতের দিন মুমিনের ছায়া হবে তার সদকা।"</em> (তিরমিযী)
+                `,
+                faqTitle: "প্রশ্নাবলী / যোগাযোগ <span class=\"emoji\">❓</span>",
+                faqContent: `
+                    <h3>সাধারণ জিজ্ঞাসা</h3>
+                    <dl>
+                        <dt>প্রশ্ন: আপনার ইউটিউব আয় কি হালাল?</dt>
+                        <dd>উত্তর: কোনও সন্দেহ এড়াতে, আমি আমার ইউটিউব চ্যানেল বিজ্ঞাপন দিয়ে মনিটাইজ করি না। এই কাজের জন্য আমার আয় শুধুমাত্র আপনাদের সরাসরি অনুদানের মাধ্যমেই আসে, যা ইনশাআল্লাহ হালাল নিশ্চিত করে।</dd>
+
+                        <dt>প্রশ্ন: আমি কীভাবে নিশ্চিত হতে পারি যে আমার অনুদান সঠিকভাবে ব্যবহৃত হচ্ছে?</dt>
+                        <dd>উত্তর: আমি আপনাদের অনুদানকে আমানত (বিশ্বাস) হিসেবে বিবেচনা করি। এগুলি ভিডিও তৈরি, সরঞ্জাম, সফ্টওয়্যার এবং জীবনযাত্রার ব্যয় নির্বাহের জন্য ব্যবহৃত হয়, যা আমাকে এই দাওয়াহ কাজে নিজেকে উৎসর্গ করতে দেয়।</dd>
+
+                        <dt>প্রশ্ন: আমি কি ভিডিওর বিষয় প্রস্তাব করতে পারি?</dt>
+                        <dd>উত্তর: অবশ্যই! আমি আমার দর্শকদের কাছ থেকে শুনতে ভালোবাসি। আপনি নীচের যোগাযোগের মাধ্যমে বা ইউটিউব মন্তব্যে আপনার পরামর্শ পাঠাতে পারেন।</dd>
+
+                        <dt>প্রশ্ন: যদি আমি আর্থিকভাবে অনুদান দিতে না পারি?</dt>
+                        <dd>উত্তর: আপনার দু'আ (প্রার্থনা) সমর্থনের অন্যতম সেরা মাধ্যম! আমার ভিডিওগুলি অন্যদের সাথে শেয়ার করা যারা উপকৃত হতে পারে, তাও সাহায্য করার একটি দুর্দান্ত উপায়। আল্লাহ আপনাকে পুরস্কৃত করুন!</dd>
+                    </dl>
+                    <h3>যোগাযোগ করুন</h3>
+                    <p>অনুসন্ধান, পরামর্শ বা শুধু সালাম জানাতে:</p>
+                    <ul>
+                        <li><strong>ইমেইল:</strong> <a href="mailto:ayat.halal.content@example.com">ayat.halal.content@example.com</a></li>
+                        <li><strong>ইউটিউব চ্যানেল:</strong> <a href="YOUR_YOUTUBE_CHANNEL_LINK" target="_blank" rel="noopener noreferrer">[আপনার চ্যানেলের নাম]</a></li>
+                    </ul>
+                `,
+                banglaWelcome: "YouTube থেকে ইনকাম হারাম হতে পারে, তাই আমি অ্যাড-ফ্রি, কোয়ালিটি ইসলামিক ভিডিও বানাই—আপনারা যদি আমাকে সাহায্য করতে চান, এই ওয়েবসাইট থেকে ডোনেট করতে পারেন ইনশাআল্লাহ!"
+            }
+        };
+
+        // --- Main Script Logic (from script.js) ---
+        document.addEventListener('DOMContentLoaded', () => {
+            let currentLang = localStorage.getItem('preferredLang') || 'en';
+            const telegramBotToken = '8068702402:AAESlu_bsAGy5k1ThuzjxrkkpBZ1f4ZCbZo'; // Your Bot Token
+            const telegramChatId = '6076273140'; // Your Chat ID
+
+            const langToggle = document.getElementById('lang-toggle');
+            const langEn = document.getElementById('lang-en');
+            const langBn = document.getElementById('lang-bn');
+            const banglaIntroP = document.getElementById('bangla-intro');
+            const pageTitleElement = document.getElementById('pageTitle');
+
+            function parseTwemoji() {
+                if (typeof twemoji !== 'undefined') {
+                    twemoji.parse(document.body, {
+                        folder: 'svg',
+                        ext: '.svg'
+                    });
+                }
+            }
+
+            function setLanguage(lang) {
+                currentLang = lang; // Update global currentLang
+                document.documentElement.lang = lang;
+                localStorage.setItem('preferredLang', lang);
+
+                if (lang === 'bn') {
+                    langEn.classList.remove('active-lang');
+                    langBn.classList.add('active-lang');
+                    if (banglaIntroP) banglaIntroP.style.display = 'inline-block';
+                } else {
+                    langBn.classList.remove('active-lang');
+                    langEn.classList.add('active-lang');
+                    if (banglaIntroP) banglaIntroP.style.display = 'none';
+                }
+
+                document.querySelectorAll('[data-lang-key]').forEach(el => {
+                    const key = el.getAttribute('data-lang-key');
+                    if (translations[lang] && translations[lang][key]) {
+                        if (el.hasAttribute('data-lang-key-placeholder')) {
+                            el.placeholder = translations[lang][key];
+                        } else {
+                            el.innerHTML = translations[lang][key];
+                        }
+                    }
+                });
+                // Update page title specifically, as it's not directly in a section
+                const activePageKey = document.querySelector('#main-nav a.active-nav')?.dataset.langKey || 'navHome';
+                if(pageTitleElement && translations[lang][activePageKey]) {
+                    pageTitleElement.textContent = translations[lang][activePageKey] + " - Ayat's Halal Support";
+                }
+
+                parseTwemoji();
+            }
+
+            if (langToggle) {
+                langToggle.addEventListener('click', () => {
+                    const newLang = document.documentElement.lang === 'en' ? 'bn' : 'en';
+                    setLanguage(newLang);
+                });
+            }
+            
+            // --- Page Navigation ---
+            const navLinks = document.querySelectorAll('#main-nav a, .logo');
+            const pageSections = document.querySelectorAll('.page-section');
+
+            function showPage(pageId) {
+                pageSections.forEach(section => {
+                    section.classList.remove('active');
+                    if (section.id === pageId) {
+                        section.classList.add('active');
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.classList.remove('active-nav');
+                    if (link.dataset.page === pageId) {
+                        link.classList.add('active-nav');
+                    }
+                });
+                // Update overall page title
+                const activePageKey = document.querySelector(`#main-nav a[data-page="${pageId}"]`)?.dataset.langKey || 'navHome';
+                if(pageTitleElement && translations[currentLang][activePageKey]) {
+                     pageTitleElement.textContent = translations[currentLang][activePageKey] + " - Ayat's Halal Support";
+                }
+
+                // Close mobile menu if open
+                if (mainNav.classList.contains('active')) {
+                    mainNav.classList.remove('active');
+                    menuToggle.textContent = '☰';
+                }
+                window.scrollTo(0, 0); // Scroll to top on page change
+            }
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const pageId = link.dataset.page;
+                    showPage(pageId);
+                    // Optionally update URL hash
+                    // window.location.hash = pageId;
+                });
+            });
+            
+            // Initial page load (default to home or based on hash)
+            // let initialPage = window.location.hash.substring(1) || 'home';
+            // if (!document.getElementById(initialPage)) initialPage = 'home'; // Fallback if hash is invalid
+            // showPage(initialPage);
+            // For simplicity, always start at home when single file is loaded
+            showPage('home');
+
+
+            // --- Hamburger Menu ---
+            const menuToggle = document.getElementById('menu-toggle');
+            const mainNav = document.getElementById('main-nav');
+            if (menuToggle && mainNav) {
+                menuToggle.addEventListener('click', () => {
+                    mainNav.classList.toggle('active');
+                    menuToggle.textContent = mainNav.classList.contains('active') ? '✕' : '☰';
+                });
+            }
+
+            // --- Lottie Animation (Homepage only) ---
+            const lottieContainer = document.getElementById('lottie-welcome');
+            if (lottieContainer) {
+                const player = document.createElement('lottie-player');
+                // IMPORTANT: Adjust this path if your Lottie JSON is elsewhere!
+                player.setAttribute('src', 'assets/lottie/welcome-animation.json'); 
+                player.setAttribute('background', 'transparent');
+                player.setAttribute('speed', '1');
+                player.setAttribute('style', 'width: 100%; height: 100%;');
+                player.setAttribute('loop', '');
+                player.setAttribute('autoplay', '');
+                lottieContainer.appendChild(player);
+            }
+
+            // --- Copy Buttons (Homepage only) ---
+            const copyButtons = document.querySelectorAll('.copy-btn');
+            copyButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const targetId = button.dataset.target;
+                    const numberElement = document.getElementById(targetId);
+                    if (numberElement) {
+                        navigator.clipboard.writeText(numberElement.textContent)
+                            .then(() => {
+                                const originalTextKey = "copyButtonText";
+                                button.textContent = translations[currentLang].copiedButtonText;
+                                button.classList.add('copied');
+                                setTimeout(() => {
+                                    button.textContent = translations[currentLang][originalTextKey];
+                                    button.classList.remove('copied');
+                                    parseTwemoji();
+                                }, 2000);
+                            })
+                            .catch(err => console.error('Failed to copy: ', err));
+                    }
+                });
+            });
+
+            // --- Donate Form Submission (Homepage only) ---
+            const donateForm = document.getElementById('donate-form');
+            const formStatus = document.getElementById('form-status');
+
+            if (donateForm && formStatus) {
+                donateForm.addEventListener('submit', async (e) => {
+                    e.preventDefault();
+                    const donorName = document.getElementById('donor-name').value.trim();
+                    const donorDescription = document.getElementById('donor-description').value.trim();
+                    
+                    let message = `🔔 New Support Note!\n\n`;
+                    if (donorName) message += `👤 Name: ${donorName}\n`;
+                    if (donorDescription) message += `💬 Message: ${donorDescription}\n`;
+                    if (!donorName && !donorDescription) message += `Someone sent an empty support note. Maybe they'll donate directly! 😊`;
+
+                    formStatus.textContent = 'Sending...';
+                    formStatus.className = '';
+
+                    try {
+                        const response = await fetch(`https://api.telegram.org/bot${telegramBotToken}/sendMessage`, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({
+                                chat_id: telegramChatId,
+                                text: message,
+                                parse_mode: 'Markdown'
+                            }),
+                        });
+                        const result = await response.json();
+                        if (result.ok) {
+                            formStatus.textContent = translations[currentLang].donationThanks;
+                            formStatus.className = 'success-message';
+                            donateForm.reset();
+                        } else {
+                            formStatus.textContent = translations[currentLang].donationError + ` (TG: ${result.description || 'Unknown error'})`;
+                            formStatus.className = 'error-message';
+                            console.error('Telegram API error:', result);
+                        }
+                    } catch (error) {
+                        formStatus.textContent = translations[currentLang].donationError;
+                        formStatus.className = 'error-message';
+                        console.error('Fetch error:', error);
+                    }
+                    parseTwemoji();
+                });
+            }
+            
+            // Set initial language and parse Twemoji for the whole document
+            setLanguage(currentLang);
+
+        }); // End DOMContentLoaded
+    </script>
+</body>
+</html>
